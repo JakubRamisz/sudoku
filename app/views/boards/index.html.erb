@@ -1,2 +1,18 @@
-<h1>Boards#index</h1>
-<p>Find me in app/views/boards/index.html.erb</p>
+<h1 align="center">Boards</h1>
+
+<div class="container">
+  <div class="row">
+    <% @boards.each do |board| %>
+      <div class="col-3">
+        <div class="card" style="width: 18rem;">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title"><%= board.name %></h5>
+            <p class="card-text">Last save at: <%= board.updated_at.strftime("%Y-%m-%d %H:%M") %></p>
+            <a href="<%= board_path(board) %>" class="stretched-link"></a>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

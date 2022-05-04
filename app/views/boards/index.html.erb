@@ -1,18 +1,23 @@
-<h1 align="center">Boards</h1>
+<h1>Boards</h1>
 
-<div class="container">
-  <div class="row">
-    <% @boards.each do |board| %>
-      <div class="col-3">
-        <div class="card" style="width: 18rem;">
-          <img src="..." class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title"><%= board.name %></h5>
-            <p class="card-text">Last save at: <%= board.updated_at.strftime("%Y-%m-%d %H:%M") %></p>
-            <a href="<%= board_path(board) %>" class="stretched-link"></a>
-          </div>
-        </div>
+<div class="d-flex flex-wrap p-5">
+  <% @boards.each do |board| %>
+    <div class="card m-3" style="width: 18rem;">
+      <img src="http://placekitten.com/500/600" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title"><%= board.name %></h5>
+        <p class="card-text">Last updated: <%= board.updated_at.strftime("%Y-%m-%d %H:%M") %></p>
+        <a href="<%= board_path(board) %>" class="stretched-link"></a>
       </div>
-    <% end %>
+    </div>
+  <% end %>
+  <div class="card m-3" style="width: 18rem;">
+    <img src="http://placekitten.com/500/600" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">New game</h5>
+      <a href="<%= new_board_path %>" class="stretched-link"></a>
+    </div>
   </div>
 </div>
+
+

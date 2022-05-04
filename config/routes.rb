@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'boards#index'
+  root "boards#index"
 
   resources :boards
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

@@ -21,6 +21,14 @@ class BoardsController < ApplicationController
     end
   end
 
+  def destroy
+    @article = Board.find(params[:id])
+    @article.destroy
+
+    redirect_to root_path, status: :see_other
+  end
+
+
   private
     def board_params
       params.require(:board).permit(:name)

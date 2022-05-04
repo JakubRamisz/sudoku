@@ -2,13 +2,19 @@
 
 <div class="d-flex flex-wrap p-5">
   <% @boards.each do |board| %>
-    <div class="card m-3" style="width: 18rem;">
+    <div class="m-3">
+    <div class="card" style="width: 18rem;">
       <img src="http://placekitten.com/500/600" class="card-img-top" alt="...">
       <div class="card-body">
         <h5 class="card-title"><%= board.name %></h5>
-        <p class="card-text">Last updated: <%= board.updated_at.strftime("%Y-%m-%d %H:%M") %></p>
-        <a href="<%= board_path(board) %>" class="stretched-link"></a>
+        <p class="card-text">Last updated: <%= board.updated_at.strftime("%d-%m-%Y %H:%M") %></p>
+        <a href="<%= board_path(board) %>" class="stretched-link" ></a>
       </div>
+    </div>
+      <%= link_to "Delete", board_path(board), :class => "btn  my-1 btn-outline-danger btn-block ", data: {
+      turbo_method: :delete,
+      turbo_confirm: "Are you sure?"
+      } %>
     </div>
   <% end %>
   <div class="card m-3" style="width: 18rem;">

@@ -1,7 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  value: 1
+  row: 1
+  column: 1
   board: one
 
 two:
+  value: 1
+  row: 1
+  column: 1
   board: two

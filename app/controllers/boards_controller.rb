@@ -12,18 +12,17 @@ class BoardsController < ApplicationController
   end
 
   def create
-    @board = Board.new(board_params)
+    @board = Create.new(board_params).call
+    redirect_to boards_path
+    rescue ActiveRecord::RecordInvalid => invalid
+      @board = invalid.record
+      render :new
 
-    if @board.save
-      redirect_to @board
-    else
-      render :new, status: :unprocessable_entity
-    end
   end
 
   def destroy
-    @article = Board.find(params[:id])
-    @article.destroy
+    @board = Board.find(params[:id])
+    @board.destroy
 
     redirect_to root_path, status: :see_other
   end

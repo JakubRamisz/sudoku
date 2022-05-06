@@ -1,1 +1,8 @@
 <h1><%= @board.name %></h1>
+<h2>fields</h2>
+<% @board.fields.each do |board| %>
+  <p>
+    <strong>Value:</strong>
+    <%= board.value %>
+  </p>
+<% end %>

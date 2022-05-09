@@ -17,7 +17,6 @@ class BoardsController < ApplicationController
     rescue ActiveRecord::RecordInvalid => invalid
       @board = invalid.record
       render :new
-
   end
 
   def destroy

@@ -5,14 +5,14 @@ class Board < ApplicationRecord
   def safe?(number, row_index, column_index)  # method checks if a given number can be inserted into given field
     row = fields.where(row: row_index)
     row.each do |field|
-      if field.value.eql?(number)
+      if field.value.eql? number
         return false
       end
     end
 
     column = fields.where(column: column_index)
     column.each do |field|
-      if field.value.eql?(number)
+      if field.value.eql? number
         return false
       end
     end
@@ -23,20 +23,34 @@ class Board < ApplicationRecord
     box = fields.where(row: [row_start, row_start + 1, row_start + 2],
                        column: [column_start, column_start + 1, column_start + 2])
     box.each do |field|
-      if field.value.eql?(number)
+      if field.value.eql? number
         return false
       end
     end
   end
 
+
+  def get_field_value(row_index, column_index)
+    fields.where(row: row_index, column: column_index).value
+  end
+
+
+  def set_field_value(value, row_index, column_index)
+    fields.where(row: row_index, column: column_index).value = value
+  end
+
+
+  private
+
   def find_empty_field
     0.upto 8 do |row_index|
       0.upto 8  do |column_index|
-        if fields.where(row: row_index, column: column_index).value.eql?(0)
+        if get_field_value(row_index, column_index).eql? 0
           return [true, row_index, column_index]  # return true if an empty field was found
         end
       end
     end
     false  # return false if there are no more empty fields
   end
+
 end

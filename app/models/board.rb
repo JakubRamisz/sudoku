@@ -7,6 +7,33 @@ class Board < ApplicationRecord
     solve
   end
 
+
+  def solved?
+    # returns false if any number from 1 to 9 appears more or less than once in any row, column or square,
+    # otherwise returns true
+    1.upto 9 do |number|
+      0.upto 8 do |i|
+        unless fields.where(row: i, value: number).size.eql?(1)
+          return false
+        end
+
+        unless fields.where(column: i, value: number).size.eql?(1)
+          return false
+        end
+      end
+
+      0.upto 2 do |i|
+        0.upto 2 do |j|
+          unless fields.where(row: 3*i..3*i+2, column: 3*j..3*j+2, value: number).size.eql?(1)
+            return false
+          end
+        end
+      end
+    end
+
+    true
+  end
+
   private
 
   def save_board
@@ -30,7 +57,7 @@ class Board < ApplicationRecord
   end
 
 
-  def safe?(number, row, column)  # method checks if a given number can be inserted into given field
+  def safe?(number, row, column)  # checks if a given number can be inserted into given field
     0.upto 8 do |i|
       if @board[row][i].eql? number
         return false

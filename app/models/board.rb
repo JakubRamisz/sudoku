@@ -2,29 +2,19 @@ class Board < ApplicationRecord
   has_many :fields, dependent: :destroy
   validates :name, presence: true
 
-
-  def get_field_value(row_index, column_index)
-    @board[row_index][column_index].value
-  end
-
-
-  def set_field_value(value, row_index, column_index)
-    @board[row_index][column_index].value = value
-  end
-
-
-  def solve
+  after_create do
     @board = Array.new(9){Array.new(9){0}}
-    solve_board
-  end
-
-  def set_field(field, row_index, column_index)
-    @board[row_index][column_index] = field
+    solve
   end
 
   private
 
   def save_board
+    0.upto 8 do |row|
+      0.upto 8 do |column|
+        fields.create(value: @board[row][column], row: row, column: column)
+      end
+    end
   end
 
 
@@ -65,7 +55,7 @@ class Board < ApplicationRecord
   end
 
 
-  def solve_board
+  def solve
     found_field = find_empty_field  # find the first empty field
 
     if found_field.eql? false  # if there are no empty fields, sudoku is solved
@@ -81,7 +71,7 @@ class Board < ApplicationRecord
       if safe?(number, row, column)
         @board[row][column] = number
 
-        if solve_board  # recursive call
+        if solve  # recursive call
           return true
         else  # if recursive solve call returned false, set field to 0 and increment the number
           @board[row][column] = 0

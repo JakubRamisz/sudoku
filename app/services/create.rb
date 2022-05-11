@@ -16,6 +16,7 @@ class Create
         board.fields.create(value: 0, row: row, column: column)
       end
     end
+    board.solve
   end
 
 end

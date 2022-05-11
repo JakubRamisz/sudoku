@@ -14,7 +14,7 @@ class Board < ApplicationRecord
 
 
   def solve
-    @board = Array.new(9){Array.new(9){1}}
+    @board = Array.new(9){Array.new(9){0}}
     solve_board
   end
 
@@ -24,8 +24,7 @@ class Board < ApplicationRecord
 
   private
 
-  def save_board(sudoku_board)
-    puts sudoku_board
+  def save_board
   end
 
 
@@ -55,43 +54,45 @@ class Board < ApplicationRecord
     row_start = row - row % 3
     column_start = column- column % 3
 
-    row_start.upto(row_start + 3) do |i|
-      column_start.upto(column_start + 3) do |j|
+    row_start.upto(row_start + 2) do |i|
+      column_start.upto(column_start + 2) do |j|
         if @board[i][j].eql? number
           return false
         end
       end
     end
+    true
   end
 
 
   def solve_board
-    found_field = find_empty_field
-    if found_field.eql? false
-      save_board(@board)
-      return true  # if there are no empty fields, sudoku is solved
+    found_field = find_empty_field  # find the first empty field
+
+    if found_field.eql? false  # if there are no empty fields, sudoku is solved
+      save_board
+      return true
     end
 
     row = found_field[0]
     column = found_field[1]
 
-    9.times do
+    9.times do  # try setting the empty field to numbers 1-9
       number = rand 1..9
       if safe?(number, row, column)
         @board[row][column] = number
 
-        if solve
+        if solve_board  # recursive call
           return true
-        end
-
-        @board[row][column] = 0
-        number += 1
-        if number.eql? 10
-          number = 1
+        else  # if recursive solve call returned false, set field to 0 and increment the number
+          @board[row][column] = 0
+          number += 1
+          if number.eql? 10
+            number = 1
+          end
         end
       end
     end
-    false
+    false  # return false if none of the numbers fit in this field
   end
 
 end

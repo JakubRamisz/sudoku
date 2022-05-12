@@ -7,6 +7,18 @@ class Board < ApplicationRecord
     solve
   end
 
+  def clear_fields(number_of_fields)
+    while number_of_fields > 0 do
+      row = rand 0..8
+      column = rand 0..8
+      unless fields.find_by(row: row, column: column).editable
+        fields.find_by(row: row, column: column).update(editable: true)
+        fields.find_by(row: row, column: column).update(value: 0)
+        number_of_fields -= 1
+      end
+      end
+  end
+
 
   def solved?
     # returns false if any number from 1 to 9 appears more or less than once in any row, column or square,

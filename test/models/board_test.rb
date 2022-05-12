@@ -43,4 +43,14 @@ class BoardTest < ActiveSupport::TestCase
 
     assert_not board.solved?, "Did not return false"
   end
+
+  test "should clear thirty fields" do
+    board = Board.new(name: "test board")
+    board.save
+    board.clear_fields(30)
+
+    assert board.fields.where(value: 0).size.eql?(30), "Did not set thirty fields' value to 0"
+    assert board.fields.where(editable: true).size.eql?(30), "Did not set thirty fields' editable to true"
+    assert board.fields.where(value: 0, editable: true).size.eql?(30), "Did not set both attributes on all 30 fields"
+  end
 end

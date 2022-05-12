@@ -39,7 +39,7 @@ class Board < ApplicationRecord
   def save_board
     0.upto 8 do |row|
       0.upto 8 do |column|
-        fields.create(value: @board[row][column], row: row, column: column)
+        fields.create(value: @board[row][column], row: row, column: column, editable: false)
       end
     end
   end

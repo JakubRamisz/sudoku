@@ -21,6 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_06_164648) do
     t.integer "value"
     t.integer "row"
     t.integer "column"
+    t.boolean "editable"
     t.integer "board_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

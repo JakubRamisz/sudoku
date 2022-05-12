@@ -1,8 +1,16 @@
 <h1><%= @board.name %></h1>
 <h2>fields</h2>
-<% @board.fields.each do |board| %>
-  <p>
-    <strong>Value:</strong>
-    <%= board.value %>
-  </p>
-<% end %>
+
+<div align="center">
+  <div class="d-flex flex-wrap" style="width: 31.5rem; height: 31.5rem;" >
+    <% @board.fields.each do |field| %>
+      <% unless field.editable %>
+        <textarea style="width: 3rem; height: 3rem; resize: none; text-align: center; padding: 0.7rem" maxlength="1" class="m-1"><%= field.value %></textarea>
+      <% else %>
+        <textarea style="width: 3rem; height: 3rem; resize: none; text-align: center; padding: 0.7rem" readonly class="m-1"><%= field.value %></textarea>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+

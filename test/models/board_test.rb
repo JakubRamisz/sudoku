@@ -27,7 +27,20 @@ class BoardTest < ActiveSupport::TestCase
         end
       end
     end
+  end
 
+  test "should return true on solved board" do
+    board = Board.new(name: "test board")
+    board.save
+    assert board.solved?, "Did not return true"
+    end
 
+  test "should return false on unsolved board" do
+    board = Board.new(name: "test board")
+    board.save
+    board.fields.find_by(row: 0, column: 0).update(value: 0)
+    board.save
+
+    assert_not board.solved?, "Did not return false"
   end
 end

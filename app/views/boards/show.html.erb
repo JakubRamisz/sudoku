@@ -2,12 +2,16 @@
 <h2>fields</h2>
 
 <div align="center">
-  <div class="d-flex flex-wrap" style="width: 31.5rem; height: 31.5rem;" >
+  <div class="board-container">
     <% @board.fields.each do |field| %>
       <% if field.editable %>
-        <textarea style="width: 3rem; height: 3rem; resize: none; text-align: center; padding: 0.7rem" maxlength="1" class="m-1"><%= field.value %></textarea>
+        <% if field.value.eql? 0 %>
+            <input type="number" class="number-input"/>
+        <% else %>
+          <input type="number" class="number-input" value="<%= field.value %>"/>
+        <% end %>
       <% else %>
-        <textarea style="width: 3rem; height: 3rem; resize: none; text-align: center; padding: 0.7rem" readonly class="m-1"><%= field.value %></textarea>
+        <input type="number" class="number-input" readonly value="<%= field.value %>"/>
       <% end %>
     <% end %>
   </div>

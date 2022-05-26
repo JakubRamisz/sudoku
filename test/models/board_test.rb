@@ -39,7 +39,6 @@ class BoardTest < ActiveSupport::TestCase
     board = Board.new(name: "test board")
     board.save
     board.fields.find_by(row: 0, column: 0).update(value: 0)
-    board.save
 
     assert_not board.solved?, "Did not return false"
   end

@@ -5,9 +5,11 @@ class Board < ApplicationRecord
   after_create do
     @board = Array.new(9){Array.new(9){0}}
     solve
+    clear_fields(30)
   end
 
   def clear_fields(number_of_fields)
+    # sets values of given number of random fields to 0 and their editable attributes to true
     while number_of_fields > 0 do
       row = rand 0..8
       column = rand 0..8
@@ -16,7 +18,7 @@ class Board < ApplicationRecord
         fields.find_by(row: row, column: column).update(value: 0)
         number_of_fields -= 1
       end
-      end
+    end
   end
 
 

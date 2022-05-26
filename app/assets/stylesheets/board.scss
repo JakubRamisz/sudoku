@@ -1,15 +1,17 @@
 .board-container {
+  background-color: #333533;
+  font-size: 40px;
   display: inline-grid;
   grid-template-columns: repeat(9, 1fr);
   grid-template-rows: repeat(9, 1fr);
-  gap: 10px;
+  gap: 5px;
 }
 
-.number-input {
-  width: 40px;
-  height: 40px;
-  border: 1px solid black;
-  border-radius: 5px;
+.sudoku-field {
+  width: 60px;
+  height: 60px;
+  border: 4px solid #333533;
+  border-radius: 10px;
   transition: border-color 0.2s;
   text-align: center;
 
@@ -22,13 +24,27 @@
   &[type=number] {
     -moz-appearance: textfield;
   }
+}
+
+.editable-field {
+  background-color: #ffdd7d;
+  color: #333533;
 
   &:hover {
     cursor: pointer;
-    border-color: red;
+    border-color: #cfdbd5;
   }
 
   &:focus {
-    border-color: blue;
+    border-color: #cfdbd5;
   }
+}
+
+.non-editable-field {
+  background-color: #ffdd7d;
+  color: #333533;
+}
+
+.board-show {
+  background-color: #333533;
 }

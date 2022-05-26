@@ -1,24 +1,28 @@
+<body class="board-show">
 <h1><%= @board.name %></h1>
 <h2>fields</h2>
 
-<div align="center">
+<div align="center" >
   <div class="board-container">
     <% @board.fields.each do |field| %>
       <% if field.editable %>
         <%= form_for(field, url: board_field_path(field)) do %>
           <% if field.value.eql? 0 %>
-            <%= text_field_tag 'field[value]', params[field.value],
-                               class: "number-input", onblur: "this.form.submit();" %>
+            <%= text_field_tag 'field[value]', params[field.value], class: "sudoku-field editable-field", maxLength: 1,
+                               onchange: "this.form.submit();" %>
           <% else %>
-            <%= text_field_tag 'field[value]', params[field.value],
-                               class: "number-input", onblur: "this.form.submit();", value: field.value %>
+            <%= text_field_tag 'field[value]', params[field.value], class: "sudoku-field editable-field", maxLength: 1,
+                               onchange: "this.form.submit();", value: field.value %>
           <% end %>
         <% end %>
       <% else %>
-      <%= text_field_tag 'field[value]', params[field.value], class: "number-input", value: field.value, disabled: true %>
+        <%= text_field_tag 'field[value]', params[field.value], class: "sudoku-field non-editable-field", value: field.value,
+                           disabled: true %>
       <% end %>
     <% end %>
   </div>
 </div>
+</body>
+
 
 

@@ -1,13 +1,16 @@
-<%= form_with model: @board do |form| %>
-<div>
-  <%= form.label :name %><br>
-  <%= form.text_field :name %>
-  <% @board.errors.full_messages_for(:title).each do |message| %>
-    <div><%= message %>></div>
-  <% end %>
-</div>
+<body class="background" >
+  <div align="center">
+    <%= form_with model: @board do |form| %>
+      <%= form.label "Please enter your name", class: "select-name-text"%><br>
+      <%= form.text_field :name, class: "select-name-field" %>
+      <% @board.errors.full_messages_for(:title).each do |message| %>
+        <div><%= message %>></div>
+      <% end %>
 
-<div>
-  <%= form.submit %>
-</div>
-<% end %>
+      <div>
+        <%= form.submit "Confirm", class: "select-name-button"%>
+      </div>
+    <% end %>
+  </div>
+</body>
+

@@ -45,6 +45,32 @@
   color: #333533;
 }
 
-.board-show {
+.background {
   background-color: #333533;
+}
+
+.select-name-text {
+  margin-top: 30px;
+  color: #ffdd7d;
+  font-size: 40px;
+}
+
+.select-name-field {
+  margin-top: 30px;
+  font-size: 40px;
+  color: #333533;
+  width: 500px;
+  height: 60px;
+  border: 4px solid #ffdd7d;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.select-name-button {
+  margin-top: 30px;
+  width: 100px;
+  height: 40px;
+  background-color: #ffdd7d;
+  border: 1px solid #333533;
+  border-radius: 5px;
 }

@@ -5,13 +5,17 @@
   <div class="board-container">
     <% @board.fields.each do |field| %>
       <% if field.editable %>
-        <% if field.value.eql? 0 %>
-            <input type="number" class="number-input"/>
-        <% else %>
-          <input type="number" class="number-input" value="<%= field.value %>"/>
+        <%= form_for(field, url: board_field_path(field)) do %>
+          <% if field.value.eql? 0 %>
+            <%= text_field_tag 'field[value]', params[field.value],
+                               class: "number-input", onblur: "this.form.submit();" %>
+          <% else %>
+            <%= text_field_tag 'field[value]', params[field.value],
+                               class: "number-input", onblur: "this.form.submit();", value: field.value %>
+          <% end %>
         <% end %>
       <% else %>
-        <input type="number" class="number-input" readonly value="<%= field.value %>"/>
+      <%= text_field_tag 'field[value]', params[field.value], class: "number-input", value: field.value, disabled: true %>
       <% end %>
     <% end %>
   </div>
